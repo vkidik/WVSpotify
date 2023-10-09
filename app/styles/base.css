@@ -1,0 +1,34 @@
+:root{
+    --base-main-body-background: rgb(31, 31, 31);
+    --base-font-size: 16px;
+    --parent-font-size: 0.75rem;
+    --add-color: rgb(143, 143, 143);
+    --base-color: #FFFFFF;
+    --player-padding: 25px 12.5px;
+    --dark-color: #000000;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    border: none;
+    outline: none;
+}
+
+html, body{
+    width: 320px;
+    height: 600px;
+    background-color: var(--base-main-body-background);
+    font-size: var(--base-font-size);
+    color: var(--base-color);
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+button:active{
+    transform: scale(0.9);
+}
