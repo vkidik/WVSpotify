@@ -1,5 +1,7 @@
 :root{
     --base-main-body-background: rgb(31, 31, 31);
+    --base-playlist-img: rgb(40, 40, 40);
+    --base-btn-background: rgba(29, 185, 84, 1);
     --base-font-size: 16px;
     --parent-font-size: 0.75rem;
     --add-color: rgb(143, 143, 143);
@@ -17,9 +19,14 @@
     outline: none;
 }
 
-html, body{
+html{
     width: 320px;
     height: 600px;
+}
+
+body{
+    width: 100%;
+    height: 100%;
     background-color: var(--base-main-body-background);
     font-size: var(--base-font-size);
     color: var(--base-color);
