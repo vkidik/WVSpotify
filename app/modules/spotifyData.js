@@ -1,4 +1,5 @@
-import './mainScripts'
+import './mainScripts.js'
+import './authSpotify.js'
 
 export class spotifyAPI {
     constructor(token) {
