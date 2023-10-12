@@ -1,6 +1,3 @@
-import './mainScripts.js'
-import './authSpotify.js'
-
 export class spotifyAPI {
     constructor(token) {
         this.token = token
@@ -20,13 +17,10 @@ export class spotifyAPI {
                 },
                 method,
                 body: JSON.stringify(body)
-            });
-            console.log("ok");
-            return await res.json();   
+            });  
         } catch (error) {
-            console.error("INVALID TOKEN OR ANOTHER ERROR")
-            console.error(error)
-            alert("error")
+            console.log("INVALID TOKEN OR ANOTHER ERROR")
+            return await res.json();
         }
     }
 
@@ -44,5 +38,9 @@ export class spotifyAPI {
 
     async getProfile() {
         return (await this.getWebAPI(`v1/me`, 'GET'))
+    }
+
+    async getPlaybackState() {
+        return (await this.getWebAPI(`v1/me/player`, 'GET'))
     }
 }

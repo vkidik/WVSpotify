@@ -1,40 +1,66 @@
-import '../spotifyData.js'
-import {spotifyAPI} from '../spotifyData.js'
+import '../authSpotify.js'
+import { spotifyAuth } from '../authSpotify.js'
+import { spotifyAPI } from '../spotifyData.js'
 
 class mainApp{
     constructor(){
-        this.token = ''
+        this.token = null
         this.user
-        this.spotifyApi 
-
+        this.spotifyApi
+        this.loginToken = false
+        this.loginSpotify = false
+        this.spotifyAuth = new spotifyAuth()
         this.checkLogin(this.token)
     }
 
     checkLogin(appToken){
         chrome.storage.local.get(['token']).then(tokenResult => {
-            if(tokenResult.token != '' || tokenResult == undefined){
+            console.log(tokenResult);
+            if(tokenResult.token != undefined || tokenResult.token != '' || tokenResult.token != null || tokenResult != undefined){
                 appToken = tokenResult.token
-                this.getDataAPI(this.token)
-            } else{
-                selectAll('#login-sect buttin').forEach(btn => {
+                this.setDataApi(appToken, 'loginSpotify')
+            } else if(tokenResult.token == undefined || tokenResult.token == '' || tokenResult.token == null){
+                document.querySelectorAll('#login-sect .btn').forEach(btn => {
                     btn.addEventListener('click', ()=> {
-                        if(btn == select('#login-sect .login-spotify')){
-                            
+                        if(btn == document.querySelector('#login-sect .login-spotify')){
+                            const windowAuth = window.open(`https://accounts.spotify.com/authorize?client_id=${spotifyAuth.clientId}&response_type=code&redirect_uri=${spotifyAuth.redirectUri}&show_dialog=true&scope=${spotifyAuth.scopes}`)
                         }
-                        if(btn == select('#login-sect .login-token')){
-                            console.log("token-auth");
+                        if(btn == document.querySelector('#login-sect .login-token')){
                             appToken = prompt('Enter API from your account')
-                            this.getDataAPI(appToken)
+                            while(appToken == ''){
+                                appToken = prompt('Enter API from your account')
+                                if(appToken != null || appToken != '' || appToken != undefined){
+                                    this.setDataApi(appToken, 'loginToken')
+                                }
+                            }
                         }
-                        this.getDataAPI(appToken)
+                        this.setDataApi(appToken)
                     })
                 });
             }
         })
     }
 
-    getDataAPI(token){
+    setDataApi(token, action){
+        if(this[action]){
+            this[action] = true
+            console.log(this[action])
+        }
         this.spotifyApi = new spotifyAPI(token)
+        chrome.storage.local.set({ token: token }).then(() => {
+            console.log("Token is set");
+            console.log(token);
+        });
+        document.querySelector("#login-sect").style.display = "none"
+
+        this.getDataApi(this.spotifyApi)
+    }
+
+    getDataApi(api){
+        api.getRequest('getPlaybackState').then(user => {
+            this.user = user
+            console.log(this.user)
+        })
     }
 }
 
