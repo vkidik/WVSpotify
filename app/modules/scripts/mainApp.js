@@ -25,7 +25,6 @@ class mainApp{
             })
         } catch (error) {
             console.log(error);
-            appToken = prompt('Enter API from your account')
             select('#login-sect .login-spotify').disabled = true
         }
         document.selectAll('#login-sect .btn').forEach(btn => {
