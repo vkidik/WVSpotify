@@ -1,8 +1,8 @@
-// // Select object in document
-// const select = obj => document.querySelector(obj)
+// Select object in document
+const select = obj => document.querySelector(obj)
 
-// // Select all objects in document
-// const selectAll = objs => document.querySelectorAll(objs)
+// Select all objects in document
+const selectAll = objs => document.querySelectorAll(objs)
 
 // Set styles to the object
 const setCss = (obj, styles) => {
