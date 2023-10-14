@@ -15,18 +15,6 @@ class mainApp{
     }
 
     checkLogin(appToken){
-        try {
-            chrome.storage.local.get(['token']).then(tokenResult => {
-                console.log(tokenResult);
-                if(tokenResult.token != undefined || tokenResult.token != '' || tokenResult.token != null || tokenResult != undefined){
-                    appToken = tokenResult.token
-                    this.setDataApi(appToken, 'loginSpotify')
-                }
-            })
-        } catch (error) {
-            console.log(error);
-            select('#login-sect .login-spotify').disabled = true
-        }
         document.selectAll('#login-sect .btn').forEach(btn => {
             btn.addEventListener('click', ()=> {
                 if(btn == document.select('#login-sect .login-spotify')){
@@ -44,6 +32,18 @@ class mainApp{
                 this.setDataApi(appToken)
             })
         });
+        try {
+            chrome.storage.local.get(['token']).then(tokenResult => {
+                console.log(tokenResult);
+                if(tokenResult.token != undefined || tokenResult.token != '' || tokenResult.token != null || tokenResult != undefined){
+                    appToken = tokenResult.token
+                    this.setDataApi(appToken, 'loginSpotify')
+                }
+            })
+        } catch (error) {
+            console.log(error);
+            select('#login-sect .login-spotify').disabled = true
+        }
     }
 
     setDataApi(token, action){
