@@ -1,4 +1,4 @@
-@import url("/app/styles/base.css");
+@import url("./base.css");
 
 body{
     display: flex;
