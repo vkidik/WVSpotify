@@ -21,40 +21,29 @@ class mainApp{
                 if(tokenResult.token != undefined || tokenResult.token != '' || tokenResult.token != null || tokenResult != undefined){
                     appToken = tokenResult.token
                     this.setDataApi(appToken, 'loginSpotify')
-                } else if(tokenResult.token == undefined || tokenResult.token == '' || tokenResult.token == null){
-                    document.querySelectorAll('#login-sect .btn').forEach(btn => {
-                        btn.addEventListener('click', ()=> {
-                            if(btn == document.querySelector('#login-sect .login-spotify')){
-                                const windowAuth = window.open(`https://accounts.spotify.com/authorize?client_id=${spotifyAuth.clientId}&response_type=code&redirect_uri=${spotifyAuth.redirectUri}&show_dialog=true&scope=${spotifyAuth.scopes}`)
-                            }
-                            if(btn == document.querySelector('#login-sect .login-token')){
-                                appToken = prompt('Enter API from your account')
-                                while(appToken == ''){
-                                    appToken = prompt('Enter API from your account')
-                                    if(appToken != null || appToken != '' || appToken != undefined){
-                                        this.setDataApi(appToken, 'loginToken')
-                                    }
-                                }
-                            }
-                            this.setDataApi(appToken)
-                        })
-                    });
                 }
             })
         } catch (error) {
             console.log(error);
-<<<<<<< HEAD
             select('#login-sect .login-spotify').disabled = true
-=======
-            appToken = prompt('Enter API from your account')
-            while(appToken == ''){
-                appToken = prompt('Enter API from your account')
-                if(appToken != null || appToken != '' || appToken != undefined){
-                    this.setDataApi(appToken, 'loginToken')
-                }
-            }
->>>>>>> parent of 2ddbe31 ()
         }
+        document.selectAll('#login-sect .btn').forEach(btn => {
+            btn.addEventListener('click', ()=> {
+                if(btn == document.select('#login-sect .login-spotify')){
+                    const windowAuth = window.open(`https://accounts.spotify.com/authorize?client_id=${spotifyAuth.clientId}&response_type=code&redirect_uri=${spotifyAuth.redirectUri}&show_dialog=true&scope=${spotifyAuth.scopes}`)
+                }
+                if(btn == document.select('#login-sect .login-token')){
+                    appToken = prompt('Enter API from your account')
+                    while(appToken == ''){
+                        appToken = prompt('Enter API from your account')
+                        if(appToken != null || appToken != '' || appToken != undefined){
+                            this.setDataApi(appToken, 'loginToken')
+                        }
+                    }
+                }
+                this.setDataApi(appToken)
+            })
+        });
     }
 
     setDataApi(token, action){
@@ -67,7 +56,7 @@ class mainApp{
             console.log("Token is set");
             console.log(token);
         });
-        document.querySelector("#login-sect").style.display = "none"
+        document.select("#login-sect").style.display = "none"
 
         this.getDataApi(this.spotifyApi)
     }
