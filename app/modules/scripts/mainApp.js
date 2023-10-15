@@ -15,12 +15,12 @@ class mainApp{
     }
 
     checkLogin(appToken){
-        document.selectAll('#login-sect .btn').forEach(btn => {
+        selectAll('#login-sect .btn').forEach(btn => {
             btn.addEventListener('click', ()=> {
-                if(btn == document.select('#login-sect .login-spotify')){
+                if(btn == select('#login-sect .login-spotify')){
                     const windowAuth = window.open(`https://accounts.spotify.com/authorize?client_id=${spotifyAuth.clientId}&response_type=code&redirect_uri=${spotifyAuth.redirectUri}&show_dialog=true&scope=${spotifyAuth.scopes}`)
                 }
-                if(btn == document.select('#login-sect .login-token')){
+                if(btn == select('#login-sect .login-token')){
                     appToken = prompt('Enter API from your account')
                     while(appToken == ''){
                         appToken = prompt('Enter API from your account')
@@ -56,7 +56,7 @@ class mainApp{
             console.log("Token is set");
             console.log(token);
         });
-        document.select("#login-sect").style.display = "none"
+        select("#login-sect").style.display = "none"
 
         this.getDataApi(this.spotifyApi)
     }
